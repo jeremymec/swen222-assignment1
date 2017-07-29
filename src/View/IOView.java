@@ -1,20 +1,21 @@
 package View;
 
 import Controller.GameController;
+import Controller.IOController;
 
 import java.util.Scanner;
 
 public class IOView {
 
-    GameController gameController;
+    IOController ioController;
 
     TileView tileView;
 
     Scanner textScanner;
 
-    public IOView(GameController gameController){
+    public IOView(IOController ioController){
 
-        this.gameController = gameController;
+        this.ioController = ioController;
         this.textScanner = new Scanner(System.in);
         this.tileView = new TileView(this);
 

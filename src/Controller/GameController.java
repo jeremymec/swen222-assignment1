@@ -1,31 +1,55 @@
 package Controller;
 
 import View.IOView;
+import org.omg.CORBA.DynAnyPackage.Invalid;
 
 public class GameController {
 
-    IOView ioView;
+    IOController ioController;
     PlayerController playerController;
+    BoardController boardController;
+    TileController tileController;
 
     public GameController(){
 
-        this.ioView = new IOView(this);
+        this.ioController = new IOController(this);
         this.playerController = new PlayerController();
+        this.boardController = new BoardController(this.ioController);
+        this.tileController = new TileController(boardController);
 
     }
 
     public void setupGame(){
 
-        ioView.output("Welcome to the game!");
+        ioController.startText();
+
+        boardController.setupBoard();
+
+        int[] boardDims = boardController.getDims();
+        ioController.initBoard(boardDims[0], boardDims[1]);
+
+
         gameLoop();
 
     }
 
     public void gameLoop(){
 
-        while (ioView.hasNext()){
+        while (ioController.inputExists()){
 
-            ioView.output(ioView.getInput());
+            ioController.outputBoard();
+            ioController.output(ioController.getInput());
+
+            try {
+
+                tileController.createWallTile(0, 0);
+
+            } catch (InvalidTilePosException e){
+
+                ioController.output("Opps, can't place a tile out of board bounds");
+
+            }
+
 
         }
 

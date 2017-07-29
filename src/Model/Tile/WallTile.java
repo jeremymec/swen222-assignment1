@@ -1,6 +1,6 @@
 package Model.Tile;
 
-public class WallTile implements Tile {
+public class WallTile extends Tile {
 
     public char middle;
     public char top;
@@ -9,13 +9,7 @@ public class WallTile implements Tile {
     public char right;
 
     public WallTile(){
-
-        this.middle = '#';
-        this.top = '#';
-        this.bottom = '#';
-        this.left = '#';
-        this.right = '#';
-
+        super('#', '#', '#', '#', '#');
     }
 
 }
