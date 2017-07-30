@@ -13,7 +13,7 @@ public class GameController {
     public GameController(){
 
         this.ioController = new IOController(this);
-        this.playerController = new PlayerController();
+        this.playerController = new PlayerController(this, ioController);
         this.boardController = new BoardController(this.ioController);
         this.tileController = new TileController(boardController);
 
@@ -28,6 +28,7 @@ public class GameController {
         int[] boardDims = boardController.getDims();
         ioController.initBoard(boardDims[0], boardDims[1]);
 
+        playerController.setupPlayers();
 
         gameLoop();
 
