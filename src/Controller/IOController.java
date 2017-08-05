@@ -77,6 +77,11 @@ public class IOController {
 
     }
 
+    public void processUserInput(){
+        // TODO - Fill in Method
+
+    }
+
     public void startText(){
         ioView.output("Welcome to the game!");
     }
