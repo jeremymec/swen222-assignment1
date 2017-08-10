@@ -1,6 +1,8 @@
 package Controller;
 
 import Model.Action;
+import Model.InvalidSyntaxException;
+import Model.createPieceAction;
 import Model.passAction;
 
 import java.util.ArrayList;
@@ -25,11 +27,21 @@ public class ActionController {
         setupActions();
     }
 
+    /***
+     * Add new actions to the game inside this function
+     */
     public void setupActions(){
         actions.add(new passAction(this));
+        actions.add(new createPieceAction(this));
+        // TODO - Add actions to this
     }
 
-    public boolean processInput(String input){
+    /***
+     * Takes a string and attempts to execute the corresponding action if one exists by looping through all Actions
+     * @param input The string to process
+     * @return returns true if action to process exists, false if not
+     */
+    public boolean processInput(String input) throws InvalidSyntaxException{
 
         for (Action action : actions){
             if (action.processInput(input)){
@@ -40,8 +52,11 @@ public class ActionController {
         return false;
     }
 
-    // Methods required for actions to execute
 
+    /***
+     * Method used by different actions; passes the string to the ioController for output
+     * @param text the string to output
+     */
     public void output(String text){
         this.ioController.output(text);
     }

@@ -1,4 +1,5 @@
 package Controller;
+import Model.InvalidSyntaxException;
 
 public class GameController {
 
@@ -39,6 +40,9 @@ public class GameController {
 
             try {
                 actionController.processInput(ioController.getInput());
+
+            } catch (InvalidSyntaxException e){
+                ioController.output(e.getMessage());
             }
 
         }
